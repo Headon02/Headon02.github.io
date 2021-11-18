@@ -42,10 +42,6 @@ function validator(){
     document.getElementById("passwordErr").innerHTML = "*Password is too short.";
     errors += 1;
   }
-  else if (password.match("[^A-Za-z]") === false){
-    document.getElementById("passwordErr").innerHTML = "*Password must contain a special character.";
-    errors += 1;
-  }
 
   if (pword === ""){
     document.getElementById("pwordErr").innerHTML = "*Please confirm password.";
@@ -76,8 +72,8 @@ function clearer(){
   Username: <br><input type="text" id="username" name="username"  onfocus="setname(this)" readonly required><span class="error" id="usernameErr"></span><br>
   Password: <br><input type="password" id="password" name="password" onfocus="setname(this)" readonly required><span class="error" id="passwordErr"></span><br>
   Confirm password: <br><input type="password" id="pword" name="pword" onfocus="setname(this)" readonly required><span class="error" id="pwordErr"></span><br><br>
-  <input type="submit" onclick="validator();">
-  <input type ="reset" onclick="clearer();"><br><br>
+  <button type="button" onclick="validator();">Submit</button>
+  <button type ="button" onclick="clearer();">Clear</button><br><br>
 <button type="button" id="ɹ" onclick="writer(this)"><audio controls><source src="audio/alveolar_approximant.ogg"></audio></button>
 <button type="button" id="l" onclick="writer(this)"><audio controls><source src="audio/alveolar_lateral_approximant.ogg"></audio></button>
 <button type="button" id="n" onclick="writer(this)"><audio controls><source src="audio/alveolar_nasal.ogg"></audio></button>
