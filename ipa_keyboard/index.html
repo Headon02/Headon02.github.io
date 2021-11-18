@@ -57,7 +57,7 @@ function validator(){
   }
 
   if (errors === 0){
-    document.forms["form"].submit();
+    location.replace("success.html");
   }
 }
 
@@ -66,7 +66,7 @@ function validator(){
 <body>
 
 <p>Make an account:</p><br>
-<form name="form" method="get" action="success.html" onsubmit="event.preventDefault(); validator();">
+<div name="form" onsubmit="event.preventDefault(); validator();">
   Username: <br><input type="text" id="username" name="username"  onfocus="setname(this)" readonly required><span class="error" id="usernameErr"></span><br>
   Password: <br><input type="password" id="password" name="password" onfocus="setname(this)" readonly required><span class="error" id="passwordErr"></span><br>
   Confirm password: <br><input type="password" id="pword" name="pword" onfocus="setname(this)" readonly required><span class="error" id="pwordErr"></span><br><br>
@@ -232,7 +232,7 @@ function validator(){
 <button type="button" id="ʟ̝̊" onclick="writer(this)"><audio controls><source src="audio/voiceless_velar_lateral_fricative.ogg"></audio></button>
 <button type="button" id="k" onclick="writer(this)"><audio controls><source src="audio/voiceless_velar_plosive.ogg"></audio></button>
 
-</form>
+</div>
 
 </body>
 </html>
