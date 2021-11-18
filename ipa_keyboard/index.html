@@ -61,17 +61,23 @@ function validator(){
   }
 }
 
+function clearer(){
+  document.getElementById("username").value = "";
+  document.getElementById("password").value = "";
+  document.getElementById("pword").value = "";
+}
+
 </script>
 </head>
 <body>
 
 <p>Make an account:</p><br>
-<div name="form" onsubmit="validator();">
+<div>
   Username: <br><input type="text" id="username" name="username"  onfocus="setname(this)" readonly required><span class="error" id="usernameErr"></span><br>
   Password: <br><input type="password" id="password" name="password" onfocus="setname(this)" readonly required><span class="error" id="passwordErr"></span><br>
   Confirm password: <br><input type="password" id="pword" name="pword" onfocus="setname(this)" readonly required><span class="error" id="pwordErr"></span><br><br>
-  <input type="submit" value="Submit">
-  <input type ="reset" value="Clear"><br><br>
+  <input type="submit" onclick="validator();">
+  <input type ="reset" onclick="clearer();"><br><br>
 <button type="button" id="ɹ" onclick="writer(this)"><audio controls><source src="audio/alveolar_approximant.ogg"></audio></button>
 <button type="button" id="l" onclick="writer(this)"><audio controls><source src="audio/alveolar_lateral_approximant.ogg"></audio></button>
 <button type="button" id="n" onclick="writer(this)"><audio controls><source src="audio/alveolar_nasal.ogg"></audio></button>
