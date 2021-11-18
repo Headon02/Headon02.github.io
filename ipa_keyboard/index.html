@@ -66,7 +66,7 @@ function validator(){
 <body>
 
 <p>Make an account:</p><br>
-<form name="form" method="post" action="success.html" onsubmit="event.preventDefault(); validator();">
+<form name="form" action="success.html" onsubmit="event.preventDefault(); validator();">
   Username: <br><input type="text" id="username" name="username"  onfocus="setname(this)" readonly required><span class="error" id="usernameErr"></span><br>
   Password: <br><input type="password" id="password" name="password" onfocus="setname(this)" readonly required><span class="error" id="passwordErr"></span><br>
   Confirm password: <br><input type="password" id="pword" name="pword" onfocus="setname(this)" readonly required><span class="error" id="pwordErr"></span><br><br>
