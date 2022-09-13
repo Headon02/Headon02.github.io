@@ -16,6 +16,11 @@ function step_changer(){
 	document.getElementById("end").step = step_values[Math.floor(Math.random()*step_values.length)];
 	document.getElementById("confirm start").step = step_values[Math.floor(Math.random()*step_values.length)];
 	document.getElementById("confirm end").step = step_values[Math.floor(Math.random()*step_values.length)];
+	
+	document.getElementById("start").value = "";
+	document.getElementById("end").value = "";
+	document.getElementById("confirm start").value = "";
+	document.getElementById("confirm end").value = "";
 }
 
 function validator(){
