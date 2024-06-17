@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-color: white;
+}
+
+img {
+  position: absolute;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  color: red;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: black;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 5px;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.center {
+  margin: auto;
+  width: 60%;
+  text-align: center;
+  padding: 10px;
+}
+
+#first:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#second:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#under:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+table {
+  table-layout: fixed ;
+  width: 100% ;
+}
+
+thead {
+  text-decoration: underline;
+}
+
+td {
+  width: 25% ;
+} 
+</style>
+</head>
+<body>
+<title>&#127465&#127466 or &#127464&#127469</title>
+
+<div id="image">
+</div>
+<div class="center" id="main">
+  <h1 class="center" style="width: 100%;">Would your German be more Swiss or German?</h1>
+  <p style="text-align:left;">Are you a <span class="tooltip" style="color: black;">cervelat<span class="tooltiptext"><img style="position: relative; max-width: 100%;" src="Cervelas_2.jpg"></span></span> &#127464&#127469 or a <span class="tooltip" style="color: black;">bratwurst<span class="tooltiptext"><img style="position: relative; max-width: 100%;" src="Bratwurst_2.jpg"></span></span> &#127465&#127466? This will be determined by where you would pronounce the <em class="tooltip">stress<span class="tooltiptext">The emphasis on a part of word (or phrase) that some languages use to mark boundaries or distinguish items. German uses stress to distinguish words similarly to English.<br><br>English examples: <b>in</b>sight and in<b>cite</b>.</span></em> of some <em class="tooltip">German<span class="tooltiptext">Specifically, Standard German. Also, Swiss Standard German is not to be confused with Swiss German, which is very distinct.<br><br>Compare: Deutsch and Tüütsch (both mean German)</span></em> words, specifically French <em class="tooltip">loans<span class="tooltiptext">Words borrowed from one language into another.<br><br>English example: Croissant (from French to English)</span></em>. There are ten questions, just click on the syllable you think you would pronounce more strongly. Try not to overthink it &#128579.</p>
+  <p class="center" id="under" onclick="get_next()">Click here to start</p>
+</div>
+<div class="center" id="word" style="position: absolute; top: 30%; left: 20%;">
+</div>
+<div id="explanation">
+</div>
+
+<script>
+var j = 0;
+
+const words = [
+  ["Ki", "no"],
+  ["Ge", "lee"],
+  ["Saf", "ran"],
+  ["Han", "gar"],
+  ["Par", "fum"],
+];
+
+var answers = [];
+
+var ch = ["second","first","second","first","first"];
+
+var de = ["first","second","first","second","second"];
+
+var c = 0;
+
+function get_next(){
+  if (j >= words.length){ 
+    slider(c);
+  } else {
+    document.getElementById("main").innerHTML = "";
+    document.getElementById("word").innerHTML = word(j);
+  } 
+  j++;
+};
+
+function explanation(i){
+  return '<p style="text-align: left;">' + explanations[i] + '</p><p style="text-align: left;" id="under" onclick=get_next()>Next</p>';
+};
+
+function word(i){
+  return '<a id=first onclick="answer(this.id)" style="font-size: xxx-large;">' + words[i][0] + '</a><a style="font-size: xxx-large;">&middot;</a><a id=second onclick="answer(this.id)" style="font-size: xxx-large;">' + words[i][1] + '</a>';
+};
+
+function answer(x){
+  answers.push(x);
+  get_next();
+};
+
+function render(x,i){
+  document.getElementById("main").innerHTML = x;
+  if (x=="first") {
+    rend = '<p><b>' + words[i][0] + '</b>&middot;' + words[i][1] + '</p>';
+  } else {
+    rend = '<p>' + words[i][0] + '&middot;<b>' + words[i][1] + '</b></p>';
+  }
+  return rend;
+};
+
+function rowmaker(x){
+  if (answers[x] == de[x]){
+    c++;
+  };
+
+  return "<tr><td>" + render(answers[x],x) + "</td><td>" + render(ch[x],x) + "</td></tr>";
+};
+
+function results(){
+  t = '<table><thead><tr><th>Your Answers</th><th>This pronunciation is more common in &#127464&#127469 than &#127465&#127466</th></tr><thead><tbody>';
+  for (let i = 0; i < answers.length; i++) {
+  	t += rowmaker(i)
+  };
+  
+  t += "</tbody></table>";
+  return t;
+};
+
+function slider(){
+  r = results();
+
+  bar = '<img style="z-index: 1; top: 40%; left: 12.5%; max-width: 80%;" src="bar.png">'
+  marker = '<img style="z-index: 2; top: 39.5%; left: ' + (17+c*(78.5-17)/5) + '%; max-width: 10%;" src="marker.png">'
+  cervelat = '<img style="z-index: 3; top: 31%; left: 3%; max-width: 20%;" src="cervelat.png">'
+  bratwurst = '<img style="z-index: 3; top: 29%; left: 77.5%; max-width: 22%;" src="bratwurst.png">'
+  
+  document.getElementById("image").innerHTML = cervelat + bratwurst + bar + marker;
+  document.getElementById("main").innerHTML = '<h1>' + (5-c)*20 + '% Cervelat &#127464&#127469 or ' + c*20 + '% Bratwurst &#127465&#127466</h1><p class="center" id="under" onclick="details(r)">Detailed Results</p>'
+  document.getElementById("word").innerHTML = "";
+};
+
+function details(res){
+  document.getElementById("image").innerHTML = "";
+  document.getElementById("main").innerHTML = res;
+  document.getElementById("word").innerHTML = "";
+  document.getElementById("explanation").innerHTML = "This is based off <a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>my bachelor's thesis</a>, where I found that Swiss Standard German speakers pronounced French loans with stress on the first syllable <b>more</b> often than German Standard German. Although, as you can see, there are some exceptions.";
+};
+</script>
+</body>
+</html>
